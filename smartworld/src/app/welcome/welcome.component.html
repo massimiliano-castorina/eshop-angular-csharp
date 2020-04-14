@@ -1,0 +1,9 @@
+
+<!--<div *ngIf = "autentification"> 
+    <h1> {{message}}</h1>-->
+    <app-jumbotron [Titolo]="'Benvenuto al nostro portale!'" [SottoTitolo]="'Qui troverai tutti i prodotti che abbiamo a disposizione con i relativi prezzi'" [Show]="false"></app-jumbotron>
+    <div *ngIf="auth" class="container" style="text-align: center;"> 
+      <h3>Per guardare i prodotti che abbiamo a disposizione clicca <a routerLink="/articoli">qui</a> </h3> 
+    </div>
+
+<!--</div>-->

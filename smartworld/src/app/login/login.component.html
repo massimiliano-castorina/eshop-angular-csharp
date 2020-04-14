@@ -1,0 +1,15 @@
+<app-jumbotron [Titolo]="'Benvenuto al nostro portale!'" [SottoTitolo]="'Fai il login per poter visualizzare i nostri prodotti'" [Show]="true" Style="background-image: url(../../assets/images/food.jpg);"></app-jumbotron>
+<div *ngIf = "access && !auth" class="container" style="margin:auto; max-width: -moz-fit-content; text-align: center;">
+  <div *ngIf = "autentification" style="text-align: left;"> 
+    {{errorMessage}}
+  </div>
+  <br>
+  <label for="userId"><b>Username</b></label>
+  <input type="text" placeholder="Enter Username or Email" name="userid" [(ngModel)] = "userId" name="username">
+
+  <label for="psw"><b>Password</b></label>
+  <input type="password" placeholder="Enter Password" [(ngModel)] = "passwordId" name="psw">
+
+  <button (click) = "loginAccess()">Login</button>
+  </div>
+  <br>

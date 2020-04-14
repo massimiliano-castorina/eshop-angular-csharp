@@ -1,0 +1,29 @@
+<app-jumbotron [Titolo]="'Benvenuto'" [SottoTitolo]="'Clicca su Mostra articoli disponibili per visualizzarli!'" [Show]="false"></app-jumbotron>
+<div *ngIf="!visibleTable" class="container" style="margin:auto; text-align: center;">
+  <button type="button" (click)="listArticoli()">Mostra Articoli Disponibili</button>
+</div>
+<!--<h2>{{messageGet}}</h2>-->
+<br>
+<div *ngIf="visibleTable" class="container" style="margin:auto; text-align: center;">
+  <h2>{{titleTable}}</h2>
+    <table id="{{idTable}}" class="table table-striped" border="1">
+      <thead>
+        <tr>
+          <th scope="col">{{titleColumnId}}</th>
+          <th scope="col">{{titleColumnNome}}</th>
+          <th scope="col">{{titleColumnPrezzo}}</th>
+          <th scope="col">{{titleColumnPzCart}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let articolo of articoli">
+          <td>{{articolo.id}}</td>
+          <td>{{articolo.nome}}</td>
+          <td>{{articolo.prezzo}}</td>
+          <td>{{articolo.n_pezzi}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <button *ngIf="visibleTable" type="button" (click)="hiddenListaArticoli()" style="margin:auto; max-width: -moz-fit-content;">Nascondi Articoli</button>
+  </div>

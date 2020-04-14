@@ -1,0 +1,25 @@
+<app-jumbotron [Titolo]="'Benvenuto al nostro portale!'" [SottoTitolo]="'Registrati! cosi potrai avere accesso ai nostri prodotti esclusivi!'" [Show]="true"></app-jumbotron>
+<form>
+  <div class="container">
+    <h1>Registrati</h1>
+    <p>Completa i campi sottostanti per registrare il tuo Account</p>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Ripeti Password</b></label>
+    <input type="password" placeholder="Password" name="psw-repeat" required>
+    <hr>
+
+    <p>Creando il tuo account stai accettando i nostri <a href="#">Terms & Privacy</a>.</p>
+    <button type="submit" class="registerbtn">Register</button>
+  </div>
+
+  <div class="container signin">
+    <p>Hai già un account? <a href="#">Accedi</a>.</p>
+  </div>
+</form> 
