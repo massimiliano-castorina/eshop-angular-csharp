@@ -20,6 +20,8 @@ input[type=text]:focus, input[type=password]:focus {
   outline: none;
 }
 
+
+
 /* Overwrite default styles of hr */
 hr {
   border: 1px solid #f1f1f1;
@@ -51,4 +53,12 @@ a {
 .signin {
   background-color: #f1f1f1;
   text-align: center;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.text {
+  border: red solid 1px!important;
 }

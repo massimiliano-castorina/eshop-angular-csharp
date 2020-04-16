@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,14 @@ export class UsersDataService {
     //         console.log("Server-side error occured.");
     //       }
     //     });
+  }
+
+  insertUser(registerObj) {
+    let httpHeaders = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Cache-Control', 'no-cache');
+    //console.log(httpHeaders);
+    return this.httpClient.post('http://localhost:8081/insertnewuser', registerObj
+    );
   }
 }

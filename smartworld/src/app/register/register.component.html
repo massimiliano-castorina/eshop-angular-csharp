@@ -5,18 +5,33 @@
     <p>Completa i campi sottostanti per registrare il tuo Account</p>
     <hr>
 
+    <div *ngIf = "name === '' && !errorMessageControll"><p class="errorMessage"> Inserisci il tuo nome </p></div>
+    <label for="nome"><b>Nome</b></label>
+    <input [ngClass]="{'text' : name === '' && !errorMessageControll}" type="text" placeholder="Inserisci Nome" name="nome" [(ngModel)] = "name" required>
+
+    <div *ngIf = "surname === '' && !errorMessageControll"><p class="errorMessage"> Inserisci il tuo cognome </p></div>
+    <label for="cognome"><b>Cognome</b></label>
+    <input [ngClass]="{'text' : surname === '' && !errorMessageControll}" type="text" placeholder="Inserisci Cognome" name="cognome" [(ngModel)] = "surname" required>
+
+    <div *ngIf = "!emailControll() && !errorMessageControll"><p class="errorMessage"> Email non valida! </p></div>
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input [ngClass]="{'text' : !emailControll() && !errorMessageControll}" type="text" placeholder="Inserisci Email" name="email" [(ngModel)] = "email" required>
 
+    <div *ngIf = "username === '' && !errorMessageControll"><p class="errorMessage"> Inserisci la tua username </p></div>
+    <label for="username"><b>Username</b></label>
+    <input [ngClass]="{'text' : username === '' && !errorMessageControll}" type="text" placeholder="Inserisci Username" name="Username" [(ngModel)] = "username" required>
+
+    <div *ngIf = "!passwordControll() && !errorMessageControll"><p class="errorMessage"> La password deve contenere almeno: 8 Caratteri, 1 carattere Maiuscolo, 1 carattere speciale e 1 numero </p></div>
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input [ngClass]="{'text' : !passwordControll() && !errorMessageControll}" type="password" placeholder="Inserisci la Password" name="psw" [(ngModel)] = "password" required>
 
+    <div *ngIf = "!passwordRptControll() && !errorMessageControll"><p class="errorMessage"> Le password non corrispondono. </p></div>
     <label for="psw-repeat"><b>Ripeti Password</b></label>
-    <input type="password" placeholder="Password" name="psw-repeat" required>
+    <input [ngClass]="{'text' : !passwordRptControll() || !errorMessageControll && passwordRpt === ''}" type="password" placeholder="Re-Inserisci la Password" name="psw-repeat" [(ngModel)] = "passwordRpt" required>
     <hr>
 
-    <p>Creando il tuo account stai accettando i nostri <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Register</button>
+    <p >Creando il tuo account stai accettando i nostri <a href="#">Terms & Privacy</a>.</p>
+    <button (click) = "insertUser()" class="registerbtn">Registrati</button>
   </div>
 
   <div class="container signin">
