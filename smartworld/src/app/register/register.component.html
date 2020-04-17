@@ -4,7 +4,9 @@
     <h1>Registrati</h1>
     <p>Completa i campi sottostanti per registrare il tuo Account</p>
     <hr>
-
+    <div *ngIf="(errors === undefined || errors != null)" class="errorMessage">
+      <p>{{errorsMessage}}</p>
+    </div>
     <div *ngIf = "name === '' && !errorMessageControll"><p class="errorMessage"> Inserisci il tuo nome </p></div>
     <label for="nome"><b>Nome</b></label>
     <input [ngClass]="{'text' : name === '' && !errorMessageControll}" type="text" placeholder="Inserisci Nome" name="nome" [(ngModel)] = "name" required>
@@ -37,4 +39,6 @@
   <div class="container signin">
     <p>Hai già un account? <a href="#">Accedi</a>.</p>
   </div>
+
+
 </form> 

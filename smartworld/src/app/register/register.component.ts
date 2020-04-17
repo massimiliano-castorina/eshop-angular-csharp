@@ -3,6 +3,7 @@ import { UsersDataService } from '../services/data/users-data.service';
 import { kStringMaxLength } from 'buffer';
 import { stringify } from 'querystring';
 import { empty } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,8 +19,10 @@ export class RegisterComponent implements OnInit {
   passwordRpt = '';
   registrazione: {};
   errorMessageControll = true;
+  errors = null;
+  errorsMessage = "L'username e/o l'email esistono già, sostituiscili e riprova";
 
-  constructor(private users: UsersDataService) { }
+  constructor(private users: UsersDataService, private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,8 +38,17 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
     if (this.registerControll() && this.emailControll() && this.passwordRptControll()) {
-      this.users.insertUser(this.registrazione).subscribe();
-      this.errorMessageControll = true;
+      this.users.insertUser(this.registrazione).subscribe(
+        result => console.log(result),
+        error => {
+            this.errors = error;
+            //console.log(this.errors.status);
+        }
+      );
+      if (this.errors === undefined || this.errors != null){
+        this.route.navigate(['login']);
+      }
+      console.log(this.errors);
     }
   }
 
