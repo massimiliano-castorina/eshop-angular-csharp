@@ -58,7 +58,7 @@ public class Utente {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -74,6 +74,11 @@ public class Utente {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+	public String getUserId() {
+		return email;
+	}
+	public void setUserId(String userId) {
+		this.email = userId;
+	}
 	
 }

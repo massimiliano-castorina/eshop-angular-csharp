@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.smartworld.project.model.Utente;
-import com.smartworld.project.model.Articoli;
 import com.smartworld.project.model.IUtenteDb;
 import com.smartworld.project.model.IArticoliDb;
 
@@ -35,9 +34,8 @@ public class Controller {
 	@Autowired
 	IUtenteDb utente;
 	
-	Boolean emailControl;
+	Boolean emailControl, loginControl;
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.POST, value = "/insertnewuser")
 	@ResponseBody
 	public ResponseEntity<?> inserisciUtente (@RequestBody Utente u) throws SQLException, NoSuchAlgorithmException {
@@ -79,11 +77,42 @@ public class Controller {
 			utente.save(ut);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Object>(HttpStatus.CONFLICT);
+			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
-//	public boolean contactExist (Iterable<Utente> u) {
-//
-//	}
+	@RequestMapping(method = RequestMethod.POST, value = "/loginuser")
+	@ResponseBody
+	public ResponseEntity<?> loginUser (@RequestBody Utente u) throws SQLException, NoSuchAlgorithmException {
+		loginControl = false;
+		final String md5;
+		System.out.println(u.getUsername());
+		System.out.println(u.getUserId());
+		
+		       // Create MessageDigest object for MD5
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        // Update input string in message digest
+        digest.update(u.getPassword().getBytes(), 0, u.getPassword().length());
+        // Converts message digest value in base 16 (hex)
+        md5 = new BigInteger(1, digest.digest()).toString(32);
+		
+        System.out.println(md5);
+		
+		utente.findAll().forEach(access -> {
+			if(access.getUsername().equals(u.getUserId())  && 
+					access.getPassword().equals(md5.toString())) {
+				loginControl = true;
+			} else if(access.getEmail().equals(u.getUserId())  && 
+					access.getPassword().equals(md5.toString())) {
+				loginControl = true;
+			}
+		});
+		System.out.println(loginControl);
+		if(loginControl) {
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
+		}
+	}	
+	
 }
